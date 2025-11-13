@@ -23,13 +23,17 @@ for c in columns:
 
 vehicles = [vehicles1, vehicles2, vehicles3]
 
-def yjminyi(phij,phii):
+def yj_yi(phij,phii):
     return 6.371E6*2*np.pi*(phij-phii)/360
-def xjminxi(lambdaj,lambdai):
+def xj_xi(lambdaj,lambdai):
     return 6.371E6*math.cos(2*np.pi*48.764246/360)*2*np.pi*(lambdaj-lambdai)/360
 
-def distman(deltax, deltay):
+def distM(phij, phii, lambdai, lambdaj):
+    deltax = xj_xi(lambdaj,lambdai)
+    deltay = yj_yi(phij,phii)
     return abs(deltax)+abs(deltay)
-def disteucl(deltax, deltay):
-    return math.sqrt(delta**2+deltay**2)
+def distE(phii, phij, lambdai, lambdaj):
+    deltax = xj_xi(lambdaj,lambdai)
+    deltay = yj_yi(phij,phii)
+    return math.sqrt(deltax**2+deltay**2)
 
