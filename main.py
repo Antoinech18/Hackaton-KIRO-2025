@@ -27,30 +27,39 @@ for c in columns:
 
 vehicles = [vehicles1, vehicles2, vehicles3]
 
-data_instance1=pd.read_csv("sujet/instances/instance_01.csv")
+instances = []
+folder="sujet/instances/"
 
-columns=data_instance1[1:]
-# ['latitude', 'longitude', 'order_weight', 'window_start', 'window_end',
-#       'delivery_duration']
+# Boucle sur les 9 fichiers
+for i in range(1, 11):
+    file_path = f"{folder}instance_{i:02d}.csv"  # format : instance_01.csv, instance_02.csv, etc.
 
+    # Charger le fichier
+    data_instancei = pd.read_csv(file_path)
+
+    # Convertir en liste de dictionnaires (une entrée par point)
+    instancei = [row[1:].to_dict() for _, row in data_instancei.iterrows()]
+
+    # Ajouter à la liste principale
+    instances.append(instancei)
 
 def yj_yi(phij,phii):
     return rho*2*np.pi*(phij-phii)/360
 def xj_xi(lambdaj,lambdai):
     return rho*math.cos(2*np.pi*phi_0/360)*2*np.pi*(lambdaj-lambdai)/360
 
-def distE(i,j):
-    deltax = xj_xi(instances[j]["longitude"],instances[i]["longitude"])
-    deltay = yj_yi(instances[j]["latitude"],instances[i]["latitude"])
+def distE(i,j,A):
+    deltax = xj_xi(instances[A][j]["longitude"],instances[A][i]["longitude"])
+    deltay = yj_yi(instances[A][j]["latitude"],instances[A][i]["latitude"])
     return math.sqrt(deltax**2+deltay**2)
 
-def distM(i,j):
-    deltax = xj_xi(instances[j]["longitude"],instances[i]["longitude"])
-    deltay = yj_yi(instances[j]["latitude"],instances[i]["latitude"])
+def distM(i,j,A):
+    deltax = xj_xi(instances[A][j]["longitude"],instances[A][i]["longitude"])
+    deltay = yj_yi(instances[A][j]["latitude"],instances[A][i]["latitude"])
     return abs(deltax)+abs(deltay)
-    
-def traveltimes(i,j,f,t):
+
+def traveltimes(i,j,f,t,A):
     gamma=0
     for i in range (4):
         gamma+=vehicles[f][f"fourier_cos_{n}"]*math.cos(n*2*math.pi*t/86400)+vehicules[f][f"fourier_sin_{n}"]*math.sin(n*2*math.pi*t/86400)
-    return (distM(i,j)/vehicles[f]["speed"]+vehicles[f]["parking_time"])*gamma
+    return (distM(i,j,A)/vehicles[f]["speed"]+vehicles[f]["parking_time"])*gamma
