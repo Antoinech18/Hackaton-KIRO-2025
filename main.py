@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 import math
 
+##### Constantes #####
+rho = 6.371E6
+phi_0 = 48.764246
+
 ##### Extraction des données #####
 
 data_vehicles = pd.read_csv("sujet/instances/vehicles.csv")
@@ -32,7 +36,7 @@ def distM(phij, phii, lambdai, lambdaj):
     deltax = xj_xi(lambdaj,lambdai)
     deltay = yj_yi(phij,phii)
     return abs(deltax)+abs(deltay)
-def distE(phii, phij, lambdai, lambdaj):
+def distE(deltax, deltay):
     deltax = xj_xi(lambdaj,lambdai)
     deltay = yj_yi(phij,phii)
     return math.sqrt(deltax**2+deltay**2)
