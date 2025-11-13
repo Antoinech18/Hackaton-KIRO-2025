@@ -31,5 +31,5 @@ def xjminxi(lambdaj,lambdai):
 def distman(deltax, deltay):
     return abs(deltax)+abs(deltay)
 def disteucl(deltax, deltay):
-    return math.sqrt(delta**2+deltay**2)
+    return math.sqrt(deltax**2+deltay**2)
 
