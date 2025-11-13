@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 import math
 
+##### Constantes #####
+rho = 6.371E6
+phi_0 = 48.764246
+
 ##### Extraction des données #####
 
 data_vehicles = pd.read_csv("sujet/instances/vehicles.csv")
@@ -24,9 +28,9 @@ for c in columns:
 vehicles = [vehicles1, vehicles2, vehicles3]
 
 def yjminyi(phij,phii):
-    return 6.371E6*2*np.pi*(phij-phii)/360
+    return rho*np.pi*(phij-phii)/360
 def xjminxi(lambdaj,lambdai):
-    return 6.371E6*math.cos(2*np.pi*48.764246/360)*2*np.pi*(lambdaj-lambdai)/360
+    return rho*math.cos(2*np.pi*phi_0/360)*2*np.pi*(lambdaj-lambdai)/360
 
 def distman(deltax, deltay):
     return abs(deltax)+abs(deltay)
