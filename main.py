@@ -18,4 +18,4 @@ for c in columns:
     vehicles2[c] = data.loc[1][c]
     vehicles3[c] = data.loc[2][c]
 
-
+data_vehicles = [vehicles1, vehicles2, vehicles3]
