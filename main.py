@@ -32,12 +32,18 @@ def yj_yi(phij,phii):
 def xj_xi(lambdaj,lambdai):
     return rho*math.cos(2*np.pi*phi_0/360)*2*np.pi*(lambdaj-lambdai)/360
 
-def distM(phii, phij, lambdai, lambdaj):
-    deltax = xj_xi(lambdaj,lambdai)
-    deltay = yj_yi(phij,phii)
-    return abs(deltax)+abs(deltay)
-def distE(deltax, deltay, lambdai, lambdaj, phii, phij):
-    deltax = xj_xi(lambdaj,lambdai)
-    deltay = yj_yi(phij,phii)
+def distE(i,j):
+    deltax = xj_xi(instances[j]["longitude"],instances[i]["longitude"])
+    deltay = yj_yi(instances[j]["latitude"],instances[i]["latitude"])
     return math.sqrt(deltax**2+deltay**2)
 
+def distM(i,j):
+    deltax = xj_xi(instances[j]["longitude"],instances[i]["longitude"])
+    deltay = yj_yi(instances[j]["latitude"],instances[i]["latitude"])
+    return abs(deltax)+abs(deltay)
+    
+def traveltimes(i,j,f,t):
+    gamma=0
+    for i in range (4):
+        gamma+=vehicles[f][f"fourier_cos_{n}"]*math.cos(n*2*math.pi*t/86400)+vehicules[f][f"fourier_sin_{n}"]*math.sin(n*2*math.pi*t/86400)
+    return (distM(i,j)/vehicles[f]["speed"]+vehicles[f]["parking_time"])*gamma
