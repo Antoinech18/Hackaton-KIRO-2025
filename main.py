@@ -21,3 +21,10 @@ for c in columns:
     vehicles3[c] = data_vehicles.loc[2][c]
 
 vehicles = [vehicles1, vehicles2, vehicles3]
+
+import math
+import numpy as np
+def yjminyi(phij,phii):
+    return 6.371E6*2*np.pi*(phij-phii)/360
+def xjminxi(lambdaj,lambdai):
+    return 6.371E6*math.cos(2*np.pi*48.764246/360)*2*np.pi*(lambdaj-lambdai)/360
