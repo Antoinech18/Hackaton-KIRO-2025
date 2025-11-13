@@ -27,6 +27,12 @@ for c in columns:
 
 vehicles = [vehicles1, vehicles2, vehicles3]
 
+data_instance1=pd.read_csv("sujet/instances/instance_01.csv")
+
+columns=data_instance1[1:]
+# ['latitude', 'longitude', 'order_weight', 'window_start', 'window_end',
+#       'delivery_duration']
+
 def yj_yi(phij,phii):
     return rho*2*np.pi*(phij-phii)/360
 def xj_xi(lambdaj,lambdai):
