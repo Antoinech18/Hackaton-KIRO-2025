@@ -28,15 +28,15 @@ for c in columns:
 vehicles = [vehicles1, vehicles2, vehicles3]
 
 def yj_yi(phij,phii):
-    return 6.371E6*2*np.pi*(phij-phii)/360
+    return rho*2*np.pi*(phij-phii)/360
 def xj_xi(lambdaj,lambdai):
-    return 6.371E6*math.cos(2*np.pi*48.764246/360)*2*np.pi*(lambdaj-lambdai)/360
+    return rho*math.cos(2*np.pi*phi_0/360)*2*np.pi*(lambdaj-lambdai)/360
 
-def distM(phij, phii, lambdai, lambdaj):
+def distM(phii, phij, lambdai, lambdaj):
     deltax = xj_xi(lambdaj,lambdai)
     deltay = yj_yi(phij,phii)
     return abs(deltax)+abs(deltay)
-def distE(deltax, deltay):
+def distE(deltax, deltay, lambdai, lambdaj, phii, phij):
     deltax = xj_xi(lambdaj,lambdai)
     deltay = yj_yi(phij,phii)
     return math.sqrt(deltax**2+deltay**2)
